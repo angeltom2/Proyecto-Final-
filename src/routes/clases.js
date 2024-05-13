@@ -19,3 +19,11 @@ router.get("/clases", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Consultar la clase por el id
+router.get("/clases/:id", (req, res) => {
+    const { id } = req.params;
+    conduccionSchema
+        .findById(id)
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
