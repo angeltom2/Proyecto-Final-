@@ -13,3 +13,9 @@ router.post("/notas", verifyToken, (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Consultar notas
+router.get("/notas", (req, res) => {
+    clasesSchema.find()
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
