@@ -27,3 +27,14 @@ router.get("/EstudianteD/:id", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Modificar los estudiantes por el id
+router.put("/EstudianteD/:id", (req, res) => {
+    const { id } = req.params;
+    const { nombre,edad,correo,telefono,direccion} = req.body;
+    clasesSchema
+        .updateOne({ _id: id }, {
+            $set: {  nombre,edad,correo,telefono,direccion}
+        })
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
