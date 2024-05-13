@@ -15,3 +15,9 @@ router.post("/profesorD", verifyToken, (req, res) => {
     }));
 });
 
+//Consultar profesor
+router.get("/profesorD", (req, res) => {
+    clasesSchema.find()
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
