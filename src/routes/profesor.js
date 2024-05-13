@@ -30,3 +30,15 @@ router.get("/profesorD/:id", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+
+//Modificar el profesor por el id
+router.put("/profesorD/:id", (req, res) => {
+    const { id } = req.params;
+    const { nombre, especialidad , experiencia,correo,telefono,direccion} = req.body;
+    clasesSchema
+        .updateOne({ _id: id }, {
+            $set: { nombre, especialidad , experiencia,correo,telefono,direccion}
+        })
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
