@@ -19,3 +19,11 @@ router.get("/EstudianteD", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Consultar los estudiantes por el id
+router.get("/EstudianteD/:id", (req, res) => {
+    const { id } = req.params;
+    conduccionSchema
+        .findById(id)
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
