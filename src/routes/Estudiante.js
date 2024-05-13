@@ -13,3 +13,9 @@ router.post("/EstudianteD", verifyToken, (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Consultar estudiante
+router.get("/EstudianteD", (req, res) => {
+    clasesSchema.find()
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
