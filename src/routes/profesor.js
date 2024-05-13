@@ -1,18 +1,13 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
-const clasesSchema = require("../models/profesorD");
-const conduccionSchema = require("../models/profesorD");
-const verifyToken = require('../routes/validate_token');
-const profesorD = require("../models/profesorD");
-
-//Nueva practica del buen desarrollo
-router.post("/profesorD", verifyToken, (req, res) => {
-    const clases = clasesSchema(req.body);
-    profesorD
+const profesorSchema = require("../models/profesorD");
+//Nueva clase
+router.post("/profesor", (req, res) => {
+    const profesor = profesorSchema(req.body);
+    profesor
         .save()
         .then((data) => res.json(data))
-        .catch((error) => res.json({ message: error
-    }));
+        .catch((error) => res.json({ message: error }));
 });
 
 //Consultar profesor

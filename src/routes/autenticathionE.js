@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
 const userSchema = require("../models/EstudianteAutenticathion");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 router.post('/signupE', async (req, res) => {
     const { usuario, correo, clave ,codigo} = req.body;
     const user = new userSchema({

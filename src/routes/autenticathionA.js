@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
 const userSchema = require("../models/administradorAutenticathion");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 router.post('/signup', async (req, res) => {
     const { usuario, correo, clave } = req.body;
     const user = new userSchema({
@@ -13,6 +15,7 @@ router.post('/signup', async (req, res) => {
     res.json(user);
 });
 module.exports = router;
+
 
 
 //inicio de sesión
@@ -34,5 +37,3 @@ router.post("/login", async (req, res) => {
         data: "Bienvenido(a)",
     });
 });
-
-module.exports = router;
