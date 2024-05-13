@@ -24,3 +24,13 @@ app.use("/api", estudianteRuta);
 app.use("/api", autenticathionARuta); 
 app.use("/api", autenticathionERuta); 
 app.use("/api", autenticathionPRuta);
+// Conexión a la base de datos
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Conexión exitosa a MongoDB"))
+  .catch((error) => console.log(error));
+
+// Escuchar en el puerto especificado
+app.listen(port, () => {
+  console.log(`Servidor escuchando en el puerto ${port}`);
+});
