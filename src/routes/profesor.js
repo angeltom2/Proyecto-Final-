@@ -21,3 +21,12 @@ router.get("/profesorD", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+
+//Consultar el profesor por el id
+router.get("/profesorD/:id", (req, res) => {
+    const { id } = req.params;
+    conduccionSchema
+        .findById(id)
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
