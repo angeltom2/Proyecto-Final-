@@ -27,3 +27,14 @@ router.get("/notas/:id", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Modificar las notas  por el id
+router.put("/notas/:id", (req, res) => {
+    const { id } = req.params;
+    const { estudiante,clase,tipo,categoria,puntaje,observaciones} = req.body;
+    clasesSchema
+        .updateOne({ _id: id }, {
+            $set: {  estudiante,clase,tipo,categoria,puntaje,observaciones}
+        })
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
