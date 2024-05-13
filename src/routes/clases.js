@@ -27,3 +27,14 @@ router.get("/clases/:id", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Modificar la clase por el id
+router.put("/clases/:id", (req, res) => {
+    const { id } = req.params;
+    const { instructor, vehiculo , fecha ,duracionHoras , estudiante , tipo ,observaciones} = req.body;
+    clasesSchema
+        .updateOne({ _id: id }, {
+            $set: { instructor, vehiculo , fecha ,duracionHoras , estudiante , tipo ,observaciones}
+        })
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
