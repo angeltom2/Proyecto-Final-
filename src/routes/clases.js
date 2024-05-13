@@ -38,3 +38,17 @@ router.put("/clases/:id", (req, res) => {
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+//Eliminar la clase por el id 
+router.delete("/clases/:id", (req, res) => {
+    const { id } = req.params;
+    clasesSchema
+        .findByIdAndDelete(id)
+        .then((data) => {
+            res.json(data);
+        })
+        .catch((error) => {
+            res.json({ message: error });
+        });
+});
+
+module.exports = router;
