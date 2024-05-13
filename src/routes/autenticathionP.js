@@ -1,41 +1,33 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
-const userSchema = require("../models/profesorAutenticathion");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
-router.post("/signup", async (req, res) => {
-    const { usuario, correo, clave , rol } = req.body;
-    const profesor = new userSchema({
+const profesorSchema = require("../models/ProfesorAutenticathion");
+router.post('/signupP', async (req, res) => {
+    const { usuario, correo, clave , rol} = req.body;
+    const profesor = new profesorSchema({
         usuario: usuario,
         correo: correo,
         clave: clave,
-        rol : rol
+        rol: rol
     });
-    profesor.clave = await user.encryptClave(profesor.clave);
-    await user.save(); //save es un método de mongoose para guardar datos en MongoDB //segundo parámetro: un texto que hace que el código generado sea único //tercer parámetro: tiempo de expiración (en segundos, 24 horas en segundos)
-    //primer parámetro: payload - un dato que se agrega para generar el token
-    const token = jwt.sign({ id: profesor_id }, process.env.SECRET, {
-        expiresIn: 60 * 60 * 24, //un día en segundos
-    });
-    res.json({
-        auth: true,
-        token,
-    });
+    profesor.clave = await profesor.encryptClave(profesor.clave);
+    await profesor.save(); //save es un método de mongoose para guardar datos en MongoDB 
+    res.json(profesor);
 });
+module.exports = router;
+
 
 //inicio de sesión
-router.post("/login", async (req, res) => {
+router.post("/loginP", async (req, res) => {
     // validaciones
-    const { error } = userSchema.validate(req.body.correo, req.body.clave);
+    const { error } = profesorSchema.validate(req.body.correo, req.body.clave);
     if (error) return res.status(400).json({ error: error.details[0].message });
     //Buscando el usuario por su dirección de correo
-    const profesor = await userSchema.findOne({ correo: req.body.correo });
+    const profesor = await profesorSchema.findOne({ correo: req.body.correo });
     //validando si no se encuentra
     if (!profesor) return res.status(400).json({ error: "Usuario no encontrado" });
     //Transformando la contraseña a su valor original para 
     //compararla con la clave que se ingresa en el inicio de sesión
-    const validPassword = await bcrypt.compare(req.body.clave, user.clave);
+    const validPassword = await bcrypt.compare(req.body.clave, profesor.clave);
     if (!validPassword)
         return res.status(400).json({ error: "Clave no válida" });
     res.json({

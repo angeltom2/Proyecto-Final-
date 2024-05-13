@@ -18,4 +18,4 @@ userSchema.methods.encryptClave = async (clave) => {
     const salt = await bcrypt.genSalt(10);
     return bcrypt.hash(clave, salt);
 }
-module.exports = mongoose.model('AdminsitradorAutenthication', userSchema); 
+module.exports = mongoose.model('User', userSchema);
