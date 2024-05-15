@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router(); //manejador de rutas de express
 const profesorSchema = require("../models/profesorD");
+const conduccionSchema = require("../models/profesorD");
+const clasesSchema = require("../models/profesorD");
 //Nueva clase
 router.post("/profesor", (req, res) => {
     const profesor = profesorSchema(req.body);
